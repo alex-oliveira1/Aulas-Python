@@ -3,6 +3,7 @@ import re
 
 # Dicionário para armazenar os fornecedores (chave: código do fornecedor, valor: informações do fornecedor)
 fornecedores = {}
+ultimo_codigo = 0
 
 # Função para validar o formato do e-mail
 def validar_email(email):
@@ -11,7 +12,9 @@ def validar_email(email):
 
 # Função para adicionar fornecedores ao cadastro
 def adicionar_fornecedor():
-    codigo = input("Digite o código do fornecedor: ")
+    global ultimo_codigo
+    ultimo_codigo += 1
+    
     nome = input("Digite o nome do fornecedor: ")
     telefone = input("Digite o telefone do fornecedor (11 dígitos): ")
     while not telefone.isdigit() or len(telefone) != 11:
@@ -23,7 +26,7 @@ def adicionar_fornecedor():
         print("E-mail inválido. Digite um e-mail válido.")
         email = input("Digite o email do fornecedor: ")
     
-    fornecedores[codigo] = {
+    fornecedores[str(ultimo_codigo)] = {
         "Nome": nome,
         "Telefone": telefone,
         "Email": email
